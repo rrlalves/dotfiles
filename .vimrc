@@ -93,6 +93,7 @@ set wrap "Wrap lines
 set hlsearch
 set showmatch
 syntax on
+set spell spelllang=en_us
 " set tags=./tags
 
 let mapleader = "="
