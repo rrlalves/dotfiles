@@ -1,0 +1,6 @@
+--recurse=yes
+--exclude=.git
+--exclude=*/docker/*
+--exclude=*/build/*
+--exclude=*/_build/*
+--exclude=trd.lib.boost/*

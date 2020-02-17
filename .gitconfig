@@ -1,0 +1,32 @@
+[user]
+	name = Roger Luiz Alves
+	email = rrlalves@gmail.com
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+	interactive = auto
+	ui = true
+	pager = true
+[push]
+	default = matching
+[branch]
+	autosetuprebase = always
+[credential]
+	helper = store
+[http]
+	sslVerify = false
+[init]
+	templatedir = /home/roger/.git_template
+[gerrit]
+	createchangeid = true
+[jira]
+	createjiraid = true
+[alias]
+	st = status
+	ci = commit
+	co = checkout
+	mg = merge --no-ff
+	df = diff
+	dc = diff --cached
+	ll = log --graph --all --decorate --oneline
