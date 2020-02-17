@@ -1,26 +1,38 @@
+"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+"                                                                              "
+"                       __   _ _ _ __ ___  _ __ ___                            "
+"                       \ \ / / | '_ ` _ \| '__/ __|                           "
+"                        \ V /| | | | | | | | | (__                            "
+"                         \_/ |_|_| |_| |_|_|  \___|                           "
+"                                                                              "
+"                                                                              "
+"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
+"------------------------------------------------------------------------------
+"                        Vundle Settings
+"------------------------------------------------------------------------------
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+  " let Vundle manage Vundle, required
+  Plugin 'VundleVim/Vundle.vim'
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-Plugin 'scrooloose/nerdtree'
-Plugin 'vim-airline/vim-airline'
-Plugin 'tomtom/tcomment_vim'
-" Plugin 'morganp/vim-SystemVerilogUVM.vim'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'vim-syntastic/syntastic'
-Plugin 'Valloric/YouCompleteMe'
-" Plugin 'brookhong/cscope.vim'
+  " The following are examples of different formats supported.
+  " Keep Plugin commands between vundle#begin/end.
+  " plugin on GitHub repo
+  Plugin 'scrooloose/nerdtree'
+  Plugin 'vim-airline/vim-airline'
+  Plugin 'tomtom/tcomment_vim'
+  " Plugin 'morganp/vim-SystemVerilogUVM.vim'
+  Plugin 'flazz/vim-colorschemes'
+  Plugin 'vim-syntastic/syntastic'
+  Plugin 'Valloric/YouCompleteMe'
+  "-------------------=== Git ===--------------------------------------
+  Plugin 'tpope/vim-fugitive'
+  Plugin 'junegunn/gv.vim'
+  " Plugin 'brookhong/cscope.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -41,7 +53,7 @@ filetype plugin indent on    " required
 
 
 "------------------------------------------------------------------------------
-"                        PLUGINS CONFIGURATIONS
+"                                CONFIGURATIONS
 "------------------------------------------------------------------------------
 
 "---------------------------
@@ -57,33 +69,23 @@ function! DiffToggle()
   endif
 endfunction
 
-"gerar o ctags
-" function! RunCtags()
-"   let workArea = $XIP_WORKAREA
-"   execute "!" . "ctags -Re -f " . workArea . "/tags" . " " . workArea
-"   execute "set tags+=" . workArea . "/tags"
-" endfunction
-
-
-"gerar o ctags
+" Gerar o ctags
 function! RunCtags()
   execute "!" . "ctags -R -f ./tags *"
   execute "!" . "set tags=./tags;"
 endfunction
 
-"gerar o cscope
-function! RunCscope()
-  execute "!" . "cscope -Rb"
-endfunction
-
 "---------------------------
 " General Configurations
 "---------------------------
-
+set splitbelow
+set splitright
 set laststatus=2
 set encoding=utf-8
 set tabstop=2
 set shiftwidth=2
+set softtabstop=2
+set smarttab
 set expandtab
 " set smartindent
 " set autoindent
@@ -92,45 +94,68 @@ set ruler
 set wrap "Wrap lines
 set hlsearch
 set showmatch
+set noswapfile
 syntax on
 set spell spelllang=en_us
-" set tags=./tags
+set wildmode=longest,list:longest
+set completeopt=menu,preview
 
-let mapleader = "="
+set cscopetag
+
 " set colorcolumn=120
-" highlight ColorColumn ctermbg=darkgray
 
 " Le o arquivo .vimrc do local executado
 " set exrc
 " set secure
 
-"set foldmethod=syntax
-":VerilogErrorFormat ncverilog 2
+set path+=**
+set wildignore+=**/build/**
+set wildignore+=**/scripts/**
+set wildignore+=**/cmake/**
+set wildignore+=**/trd/**
+set wildignore+=**/bsp/**
+set wildignore+=**/topbuild/**
 
+" Plugin Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+set list
+set listchars=tab:▸\ ,trail:␣,nbsp:⍽
+set highlight+=8:WarningMsg  " Use a new highlight
+
+"Don't loose selection when indent"
+xnoremap <  <gv
+xnoremap >  >gv
 
 "---------------------------
 " Gui options
 "---------------------------
-
 set t_Co=256
 colorscheme molokai
 highlight ColorColumn ctermbg=0 guibg=red
 
-
 "---------------------------
 "Keymap settings
 "---------------------------
+" Mapea tecla leader
+let mapleader = "="
+
 "Change between .cc and h
-map <F3>   :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
-
-"Align the text
-map <F4>   :!column -t<CR>
-
-"Remove spaces from the end of the lines
-map <F5>   :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
+" map <F3>   :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
 
 "Enable Nerdtree
-map <F6>   :NERDTreeToggle<CR>
+map <F2>   :NERDTreeToggle<CR>
+
+" Abre arquivo em um painel lateral
+nnoremap <F3> :vertical wincmd f<CR>
+
+" Align the text
+map <F4>   :!column -t<CR>
+
+" Remove spaces from the end of the lines
+map <F5>   :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 
 " Enable and disable numbers
 map <F7>   :set nonumber!<CR>
@@ -138,35 +163,23 @@ map <F7>   :set nonumber!<CR>
 " Enable diff
 map <F8>   :call DiffToggle()<CR>
 
-" goto definition with F12
+" goto definition
 map <leader>] <C-]>
 map <leader>t  <C-t>
+
+map <Tab>   :tabn<CR>
+map <S-Tab> :tabp<CR>
 
 map <C-j>   :m .+1<CR>
 map <C-h>   :m .-2<CR>
 
-map <Tab>   :tabn<CR>
-map <S-Tab> :tabp<CR>
-map <C-n>   :tabe<CR>
-map <C-w>   :close<CR>
-map <C-s>   :w!<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
 
-map <C-Left>  :wincmd h<CR>
-map <C-Down>  :wincmd j<CR>
-map <C-Up>    :wincmd k<CR>
-map <C-Right> :wincmd l<CR>
-
-"Habilia o copy e paste
+" Enable copy and paste
 map <C-c> "+y<CR>
-
-" System_Verilog_Plugin
-" nnoremap <leader>i :VerilogFollowInstance<CR>
-" nnoremap <leader>I :VerilogFollowPort<CR>
-" nnoremap <leader>u :VerilogGotoInstanceStart<CR>
 
 " Run Ctags
 map <leader>q :call RunCtags()<CR>
-" map <leader>F12 :call RunCscope()<CR>
 
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
@@ -174,63 +187,20 @@ map <leader>pp :setlocal paste!<cr>
 " Remove the Windows ^M - when the encodings gets messed up
 noremap <leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
-" Plugin Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
+"---------------------------
+" Plugins Configurations
+"---------------------------
 let g:syntastic_always_populate_loc_list = 1
 " let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-if has("cscope")
-    set csprg=/usr/bin/cscope
-    set csto=0
-    set cst
-    set nocsverb
-    " add any database in current directory
-        if filereadable("cscope.out")
-                 cs add cscope.out
-                         " else add database pointed to by environment
-                             elseif $CSCOPE_DB != ""
-        cs add $CSCOPE_DB
-    endif
+"NERDTREE config
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+"let NERDTreeWinSize = 50
 
-    " Find this C symbol (variable name)
-    nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-
-    " Find this definition
-    nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
-
-    " Find functions calling this function
-    nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
-
-    " Find this text string
-    nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-
-    " Find this egrep pattern
-    nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
-
-    " Find this file
-    nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
-
-    " Find files #including this file
-    nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-
-    " Find functions called by this function
-    nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
-
-    nmap <C-@>s :scs find s <C-R>=expand("<cword>")<CR><CR>	
-    nmap <C-@>g :scs find g <C-R>=expand("<cword>")<CR><CR>	
-    nmap <C-@>c :scs find c <C-R>=expand("<cword>")<CR><CR>	
-    nmap <C-@>t :scs find t <C-R>=expand("<cword>")<CR><CR>	
-    nmap <C-@>e :scs find e <C-R>=expand("<cword>")<CR><CR>	
-    nmap <C-@>f :scs find f <C-R>=expand("<cfile>")<CR><CR>	
-    nmap <C-@>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>	
-    nmap <C-@>d :scs find d <C-R>=expand("<cword>")<CR><CR>
-endif
-
-set list
-set listchars=tab:▸\ ,trail:␣,nbsp:⍽
-set highlight+=8:WarningMsg  " Use a new highlight
+" You complete me config
+let g:ycm_autoclose_preview_window_after_completion=1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
