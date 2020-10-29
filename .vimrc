@@ -75,6 +75,12 @@ function! RunCtags()
   execute "!" . "set tags=./tags;"
 endfunction
 
+" Change ^M
+function! RunFinalC()
+  execute "e ++ff=unix"
+  execute "set ff=dos"
+endfunction
+
 "---------------------------
 " General Configurations
 "---------------------------
@@ -175,8 +181,11 @@ map <C-h>   :m .-2<CR>
 
 nnoremap <C-f> :NERDTreeFind<CR>
 
-" Enable copy and paste
+" Enable copy to clipboard
 map <C-c> "+y<CR>
+
+" Open a new tab
+map <C-m> :tabnew<CR>
 
 " Run Ctags
 map <leader>q :call RunCtags()<CR>
@@ -185,7 +194,7 @@ map <leader>q :call RunCtags()<CR>
 map <leader>pp :setlocal paste!<cr>
 
 " Remove the Windows ^M - when the encodings gets messed up
-noremap <leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+noremap <leader>m :call RunFinalC()<CR>
 
 "---------------------------
 " Plugins Configurations
@@ -196,7 +205,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 "NERDTREE config
-let NERDTreeMinimalUI = 1
+" let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 "let NERDTreeWinSize = 50
 
@@ -204,3 +213,5 @@ let NERDTreeDirArrows = 1
 let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
+
+set clipboard=unnamedplus
