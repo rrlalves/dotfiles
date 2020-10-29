@@ -75,12 +75,6 @@ function! RunCtags()
   execute "!" . "set tags=./tags;"
 endfunction
 
-" Change ^M
-function! RunFinalC()
-  execute "e ++ff=unix"
-  execute "set ff=dos"
-endfunction
-
 "---------------------------
 " General Configurations
 "---------------------------
@@ -173,6 +167,9 @@ map <F8>   :call DiffToggle()<CR>
 map <leader>] <C-]>
 map <leader>t  <C-t>
 
+" Open a new tab interfere com o comando de copiar
+" map <leader>m :tabnew<CR>
+
 map <Tab>   :tabn<CR>
 map <S-Tab> :tabp<CR>
 
@@ -184,17 +181,11 @@ nnoremap <C-f> :NERDTreeFind<CR>
 " Enable copy to clipboard
 map <C-c> "+y<CR>
 
-" Open a new tab
-map <C-m> :tabnew<CR>
-
 " Run Ctags
 map <leader>q :call RunCtags()<CR>
 
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
-
-" Remove the Windows ^M - when the encodings gets messed up
-noremap <leader>m :call RunFinalC()<CR>
 
 "---------------------------
 " Plugins Configurations
@@ -213,5 +204,3 @@ let NERDTreeDirArrows = 1
 let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
-
-set clipboard=unnamedplus
