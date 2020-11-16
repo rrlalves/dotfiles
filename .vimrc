@@ -32,13 +32,14 @@ call vundle#begin()
   "-------------------=== Git ===--------------------------------------
   Plugin 'tpope/vim-fugitive'
   Plugin 'junegunn/gv.vim'
+  Plugin 'kien/ctrlp.vim'
   " Plugin 'brookhong/cscope.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
-"filetype plugin on
+filetype plugin on
 "
 " Brief help
 " :PluginList       - lists configured plugins
@@ -94,11 +95,13 @@ set ruler
 set wrap "Wrap lines
 set hlsearch
 set showmatch
-set noswapfile
+" set noswapfile
 syntax on
 set spell spelllang=en_us
 set wildmode=longest,list:longest
 set completeopt=menu,preview
+
+set directory=~/.vim/tmp    " move swp file to /tmp
 
 set cscopetag
 
@@ -187,18 +190,31 @@ map <leader>q :call RunCtags()<CR>
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
 
+" default command to invoke CtrlP:
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_max_files=0
+let g:ctrlp_max_depth=20
+let g:ctrlp_custom_ignore = {'dir': '\v(trd\.*|\.git|\.*bsp\.*|\.*build\.*)', 'file': '\v\.(txt|html|cmake)$'}
+
 "---------------------------
 " Plugins Configurations
 "---------------------------
 let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
+let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+"let b:syntastic_mode = 'passive'
+let g:syntastic_cpp_checkers = ['clang_check', 'gcc']
 
 "NERDTREE config
 " let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 "let NERDTreeWinSize = 50
+let NERDTreeChDirMode=2
+let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
+let NERDTreeShowBookmarks=1
 
 " You complete me config
 let g:ycm_autoclose_preview_window_after_completion=1
