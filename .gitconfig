@@ -17,7 +17,7 @@
 [http]
 	sslVerify = false
 [init]
-	templatedir = /home/roger/.git_template
+	templatedir = ~/.git_template
 [gerrit]
 	createchangeid = true
 [jira]
@@ -30,3 +30,5 @@
 	df = diff
 	dc = diff --cached
 	ll = log --graph --all --decorate --oneline
+[core]
+	editor = vim

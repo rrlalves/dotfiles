@@ -171,7 +171,7 @@ map <leader>] <C-]>
 map <leader>t  <C-t>
 
 " Open a new tab interfere com o comando de copiar
-" map <leader>m :tabnew<CR>
+map <leader>m :tabnew<CR>
 
 map <Tab>   :tabn<CR>
 map <S-Tab> :tabp<CR>
