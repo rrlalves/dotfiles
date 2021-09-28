@@ -127,6 +127,7 @@ set statusline+=%*
 set list
 set listchars=tab:▸\ ,trail:␣,nbsp:⍽
 set highlight+=8:WarningMsg  " Use a new highlight
+" set clipboard=unnamedplus
 
 "Don't loose selection when indent"
 xnoremap <  <gv
