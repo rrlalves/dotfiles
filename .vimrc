@@ -105,7 +105,7 @@ set directory=~/.vim/tmp    " move swp file to /tmp
 
 set cscopetag
 
-" set colorcolumn=120
+" set colorcolumn=80
 
 " Le o arquivo .vimrc do local executado
 " set exrc

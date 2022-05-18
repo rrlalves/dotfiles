@@ -1,6 +1,6 @@
 [user]
 	name = Roger Luiz Alves
-	email = rrlalves@gmail.com
+	email = rlalves@padtec.com.br
 [color]
 	diff = auto
 	status = auto
@@ -17,7 +17,7 @@
 [http]
 	sslVerify = false
 [init]
-	templatedir = ~/.git_templates/
+  templatedir = /home/rlalves/.git_templates/
 [gerrit]
 	createchangeid = true
 [jira]

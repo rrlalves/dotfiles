@@ -8,26 +8,17 @@ alias clean='echo -n "Really clean this directory?";
   else
      echo "Not cleaned.";
   fi'
-alias h='history'
-alias j="jobs -l"
-alias l="ls -l "
-alias ll="ls -alF"
-alias la='ls -A'
-alias ls="ls -F"
-alias pu="pushd"
-alias po="popd"
-alias gg='grep -RIsin --exclude-dir={build,test,.git} --exclude={tags,*.html,*.js}'
 
+alias gg='grep -RIsin --exclude-dir={build,test,.git} --exclude={tags,*.html,*.js}'
 alias rdesktop='rdesktop -u rlalves -d padtec -g 1900x1024'
 alias netuno='rdesktop netuno -a 16'
+# alias python='python2.7'
+alias killforti='sudo killall -9 /opt/forticlient/*'
+
+export PATH=${PATH}:/home/rlalves/.local/bin:/home/rlalves/script
 
 # Set terminal title
-if [ "$color_prompt" = yes ]; then
-  PS1="${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[0m\033[1;32m\]\$(parse_git_branch)\[\033[00m\]\$ "
-else
-  PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
-unset color_prompt force_color_prompt
+PS1="${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[0m\033[1;32m\]\$(parse_git_branch)\[\033[00m\]\$ "
 
 # Function wich gets the git branch
 parse_git_branch() {
