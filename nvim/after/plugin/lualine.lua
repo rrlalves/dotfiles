@@ -120,16 +120,17 @@ ins_left {
   padding = { right = 1 },
 }
 
-ins_left {
-  -- filesize component
-  'filesize',
-  cond = conditions.buffer_not_empty,
-}
+-- ins_left {
+--   -- filesize component
+--   'filesize',
+--   cond = conditions.buffer_not_empty,
+-- }
 
 ins_left {
   'filename',
   cond = conditions.buffer_not_empty,
   color = { fg = colors.magenta, gui = 'bold' },
+  path = 1 -- 0 = just filename, 1 = relative path, 2 = absolute path
 }
 
 ins_left { 'location' }
