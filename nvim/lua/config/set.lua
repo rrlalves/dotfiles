@@ -48,3 +48,6 @@ vim.opt.mouse = "r"
 vim.lsp.set_log_level='debug'
 
 vim.opt.list = true
+
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1

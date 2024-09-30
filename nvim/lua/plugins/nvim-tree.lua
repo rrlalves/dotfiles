@@ -22,10 +22,9 @@ return {
         vim.api.nvim_set_keymap(
             "n",
             "<space>qq",
-            ":nvimtreetoggle<cr>",
+            ":NvimTreeToggle<cr>",
             { noremap = true }
         )
 
     end
 }
-
