@@ -25,6 +25,5 @@ return {
             ":NvimTreeToggle<cr>",
             { noremap = true }
         )
-
     end
 }
