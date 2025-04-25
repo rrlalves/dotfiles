@@ -28,7 +28,7 @@ call vundle#begin()
   " Plugin 'morganp/vim-SystemVerilogUVM.vim'
   Plugin 'flazz/vim-colorschemes'
   Plugin 'vim-syntastic/syntastic'
-  Plugin 'Valloric/YouCompleteMe'
+  " Plugin 'Valloric/YouCompleteMe'
   "-------------------=== Git ===--------------------------------------
   Plugin 'tpope/vim-fugitive'
   Plugin 'junegunn/gv.vim'
@@ -83,13 +83,13 @@ set splitbelow
 set splitright
 set laststatus=2
 set encoding=utf-8
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
+set tabstop=4 " show existing tab with n spaces width
+set shiftwidth=4 " when indenting with '>', use n spaces width
+set softtabstop=4 " Sets the number of columns for a TAB
 set smarttab
 set expandtab
-" set smartindent
-" set autoindent
+set smartindent
+set autoindent
 set mouse=n
 set ruler
 set wrap "Wrap lines
@@ -197,7 +197,7 @@ let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_max_files=0
 let g:ctrlp_max_depth=20
-let g:ctrlp_custom_ignore = {'dir': '\v(trd\.*|\.git|\.*bsp\.*|\.*build\.*)', 'file': '\v\.(txt|html|cmake)$'}
+let g:ctrlp_custom_ignore = {'dir': '\v(trd\.*|\.git|\.*bsp\.*|\.*build\.*|tools\.*)', 'file': '\v\.(txt|html|cmake)$'}
 
 "---------------------------
 " Plugins Configurations
@@ -205,9 +205,10 @@ let g:ctrlp_custom_ignore = {'dir': '\v(trd\.*|\.git|\.*bsp\.*|\.*build\.*)', 'f
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+let g:syntastic_check_on_wq = 1
 "let b:syntastic_mode = 'passive'
 let g:syntastic_cpp_checkers = ['clang_check', 'gcc']
+let g:syntastic_quiet_messages = { 'regex': 'No such file or directory' }
 
 "NERDTREE config
 " let NERDTreeMinimalUI = 1
@@ -218,6 +219,6 @@ let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
 let NERDTreeShowBookmarks=1
 
 " You complete me config
-let g:ycm_autoclose_preview_window_after_completion=1
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_autoclose_preview_window_after_completion = 1
+" let g:ycm_autoclose_preview_window_after_completion=1
+" let g:ycm_autoclose_preview_window_after_insertion = 1
+" let g:ycm_autoclose_preview_window_after_completion = 1
